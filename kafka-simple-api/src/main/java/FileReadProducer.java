@@ -92,7 +92,7 @@ public class FileReadProducer{
                 Path filename = ev.context();
                 System.out.println(filename);
 
-                //Send new file
+                //Gui file moi
                 openAndSendSingleFile(producer, topic, filename);
             }
             boolean valid = key.reset();
@@ -154,14 +154,14 @@ public class FileReadProducer{
     public KafkaProducer<String, String> createKafkaProducer(){
 
         String bootstrapServers = "127.0.0.1:9092";
-        //Create Producer properties
+        //Tao cac thuoc tinh cho Producer
         Properties properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
         properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
-        //Create Producer
+        //Tao Producer
         KafkaProducer<String,String> producer = new KafkaProducer<String,String>(properties);
 
         return producer;

@@ -13,7 +13,7 @@ package object common {
 
   val largeContinuousCols = Array("duration","src_bytes","dst_bytes")
 
-  //"features" for Selector
+  //"features" cho Selector
   val assembledForSelectionCols = Array("duration_Discretized","protocol_type_Indexed","service_Indexed","flag_Indexed",
     "src_bytes_Discretized","dst_bytes_Discretized","land","wrong_fragment","urgent","hot","num_failed_logins",
     "logged_in","num_compromised","root_shell","su_attempted","num_root",
@@ -25,7 +25,7 @@ package object common {
     "dst_host_srv_diff_host_rate","dst_host_serror_rate","dst_host_srv_serror_rate",
     "dst_host_rerror_rate","dst_host_srv_rerror_rate")
 
-  //"features for ML Model
+  //"features cho ML Model
   val assembledCols = Array("duration","protocol_type_Indexed","service_Indexed","flag_Indexed",
     "src_bytes","dst_bytes","land","wrong_fragment","urgent","hot","num_failed_logins",
     "logged_in","num_compromised","root_shell","su_attempted","num_root",

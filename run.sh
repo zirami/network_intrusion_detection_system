@@ -5,9 +5,9 @@ KAFKA_TOPIC="netflows"
 DATASET_LOCATION="../dataset/nsl-kdd"
 MODELS_LOCATION="../Models"
 TRAINING_FILE="KDDTrain+.txt"
-ML_ALGORITHM="rf" # rf for Random forest or dt for Decision Tree
+ML_ALGORITHM="rf" # rf cho Random forest hoac dt cho Decision Tree
 OUTPUT_METHOD="elasticsearch"
 set +a
 
-# Command run program
+# Lenh khoi dong docker
 docker-compose -f docker-compose.yml up

@@ -32,9 +32,9 @@ object batchTraining {
     val trainFile = args(0)
     val modelsLocation = args(1)
 
-    /*******************************
-    ** Training file preparation ***
-    ********************************/
+    /************************************
+    ** Chuan bi file cho viec training **
+    *************************************/
 
     val trainDF = spark.read
       .schema(kddDataSchema)
@@ -53,10 +53,10 @@ object batchTraining {
     //tao cac chi muc cho categorical kdd features
     val stringIndexer = indexCategoricalKdd(replacedLabelsTrainDF)
 
-    //Tạo Discretizer cho các tính năng kdd lớn liên tục cho Chi Square Selection
+    //Tao Discretizer cho cac tinh nang kdd lon lien tuc cho Chi Square Selection
     val discretizer = discretizeLargeContinuousKdd(replacedLabelsTrainDF)
 
-    //Hợp cac tinh nang cho mo hinh (khong roi rac)
+    //Hop cac tinh nang cho mo hinh (khong roi rac)
     //va cho chi square selection (co roi rac)
     val stages = Array(stringIndexer, discretizer)
     val pipelineModel = assembleKdd(replacedLabelsTrainDF, stages)
@@ -65,19 +65,19 @@ object batchTraining {
     println("Feature preprocessing")
     val assembledTrainDF = pipelineModel.transform(replacedLabelsTrainDF)
 
-    //Chi Squared feature selection
+    //Chon tinh nang Chi Squared
     println("Applying Chi-squared selection")
     val chiSqModel = applyChiSqSelection2(assembledTrainDF,10)
     chiSqModel.write.overwrite().save(modelsLocation + "/chiSqModel")
 
-    //chọn features voi chiSq model
+    //chon features voi chiSq model
     val selectedTrainDF = chiSqModel.transform(assembledTrainDF)
 
     /********************************
      ******** Model training ********
      ********************************/
 
-    //Decision tree training
+    //Training cho Decision Tree model
     println("Training Decision Tree...")
     val dt = new DecisionTreeClassifier()
       .setLabelCol("label_Indexed")
