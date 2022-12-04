@@ -21,4 +21,6 @@ SPARK_TEST_ARGUMENTS="--conf spark.network.timeout=300 --conf spark.sql.streamin
 ELASTICSEARCH_NODE_NAMES="node6.swarm1.network-intrusion-detect-pg0.emulab.net,node7.swarm1.network-intrusion-detect-pg0.emulab.net,nodees.swarm1.network-intrusion-detect-pg0.emulab.net"
 set +a
 
-docker stack deploy -c docker-compose-swarm.yml testcluster
+#docker stack deploy -c docker-compose-swarm.yml testcluster
+# Lenh khoi dong docker
+docker-compose -f docker-compose-swarm.yml up

@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 import scala.concurrent.duration.NANOSECONDS
 
-object batchTraining {
+object testRW {
   def main(args: Array[String]): Unit = {
 
     if(!args(0).startsWith("hdfs") && !args(0).startsWith("s3")){ //Khong check input neu input den tu hdfs hoac s3

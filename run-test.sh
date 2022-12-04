@@ -2,8 +2,8 @@
 set -a
 KAFKA_TOPIC="netflows"
 NUM_OF_SPARK_WORKERS="2"
-MODELS_LOCATION="s3://thangntsbucket/Models"
-DATASET_LOCATION="s3://thangntsbucket/Datasets/NSL-KDD"
+MODELS_LOCATION="s3a://thangntsbucket/Models"
+DATASET_LOCATION="s3a://thangntsbucket/Datasets/NSL-KDD"
 TRAINING_FILE="KDDTrain+.txt"
 SPARK_TRAIN_ARGUMENTS="--conf spark.hadoop.fs.s3a.endpoint=s3.us-east-1.amazonaws.com --conf spark.hadoop.fs.s3a.access.key=<access_key> --conf spark.hadoop.fs.s3a.secret.key=<secret_key>"
 ML_ALGORITHM="dt" # rf for Random forest or dt for Decision Tree
@@ -14,4 +14,4 @@ ELASTICSEARCH_NODE_NAMES="node6.swarm1.network-intrusion-detect-pg0.emulab.net,n
 set +a
 
 # Lenh khoi dong docker
-docker-compose -f docker-compose.yml up
+docker-compose -f docker-compose-testconnect.yml up
