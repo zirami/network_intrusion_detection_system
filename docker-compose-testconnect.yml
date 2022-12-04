@@ -10,6 +10,8 @@ services:
      - "7077:7077"
    environment:
      - INIT_DAEMON_STEP=setup_spark
+   networks: 
+     - cluster_net
   #============================================================================
   spark-worker-1:
    image: bde2020/spark-worker:3.0.2-hadoop3.2
@@ -20,9 +22,8 @@ services:
      - "8081:8081"
    environment:
      - "SPARK_MASTER=spark://spark-master:7077"
-   volumes:
-     - ${DATASET_LOCATION}:/usr/myfiles/Dataset
-     - ${MODELS_LOCATION}:/usr/myfiles/Models
+   networks: 
+     - cluster_net
   #============================================================================
   spark-worker-2:
    image: bde2020/spark-worker:3.0.2-hadoop3.2
@@ -35,9 +36,8 @@ services:
      - "SPARK_MASTER=spark://spark-master:7077"
      - "SPARK_WORKER_CORES=1"
      - "SPARK_WORKER_MEMORY=1G"
-   volumes:
-     - ${DATASET_LOCATION}:/usr/myfiles/Dataset
-     - ${MODELS_LOCATION}:/usr/myfiles/Models
+   networks: 
+     - cluster_net
   #============================================================================
   spark-submit-training:
    image: minkal/spark-submit-detection
@@ -51,8 +51,12 @@ services:
      SPARK_APPLICATION_ARGS: "${DATASET_LOCATION}/${TRAINING_FILE} ${MODELS_LOCATION}"
      SPARK_SUBMIT_ARGS: "${SPARK_TRAIN_ARGUMENTS}"
      ENABLE_INIT_DAEMON: "false"
-   volumes:
-     - ${DATASET_LOCATION}:/usr/myfiles/Dataset
-     - ${MODELS_LOCATION}:/usr/myfiles/Models
+   networks: 
+     - cluster_net  
   #============================================================================
+  networks: 
+  cluster_net:
+    driver: overlay
+    attachable: true
+    name: cluster_net
   #============================================================================
