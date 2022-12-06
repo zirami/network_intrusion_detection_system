@@ -53,7 +53,7 @@ object batchTraining {
     //tao cac chi muc cho categorical kdd features
     val stringIndexer = indexCategoricalKdd(replacedLabelsTrainDF)
 
-    //Tao Discretizer cho cac tinh nang kdd lon lien tuc cho Chi Square Selection
+    //Tao phan biet (Discretizer) cho cac tinh nang kdd lon lien tuc cho Chi Square Selection
     val discretizer = discretizeLargeContinuousKdd(replacedLabelsTrainDF)
 
     //Hop cac tinh nang cho mo hinh (khong roi rac)
