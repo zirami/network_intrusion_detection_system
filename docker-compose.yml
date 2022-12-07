@@ -119,6 +119,8 @@ services:
      ELASTICSEARCH_URL: http://elasticsearch:9200
    logging:
      driver: none
+   volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
   #============================================================================
   es_kibana_setup:
    image: minkal/es_kib_setup

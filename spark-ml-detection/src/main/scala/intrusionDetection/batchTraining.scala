@@ -18,16 +18,15 @@ import scala.concurrent.duration.NANOSECONDS
 object batchTraining {
   def main(args: Array[String]): Unit = {
 
-    if(!args(0).startsWith("hdfs") && !args(0).startsWith("s3")){ //Khong check input neu input den tu hdfs hoac s3
-      parseBatchArgs(args)
-    }
+    // Check input cho args
+    parseBatchArgs(args)
 
     val spark = SparkSession.builder()
       .appName("Model Training")
       //.master("local[*]")
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
-    System.setProperty("com.amazonaws.services.s3.enableV4", "true")
+    // System.setProperty("com.amazonaws.services.s3.enableV4", "true") -  thu nghiem vung nho tap trung
 
     val trainFile = args(0)
     val modelsLocation = args(1)

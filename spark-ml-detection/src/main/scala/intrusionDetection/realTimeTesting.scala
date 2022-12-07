@@ -57,6 +57,7 @@ object realTimeTesting {
 
     //Lay ten cua cot
     val options = Map("delimiter" -> ",")
+    //Chia cac cot, phan tach theo dau ',', có Schema la luoc do da duoc dinh nghia ben file common, va chi dinh cac value se la kieu text,string.
     val schemaTestDF = kafkaTestDF
       .select(from_csv(col("value").cast("String"),kddDataSchema,options) as "csv")
       .select("csv.*")
@@ -103,6 +104,12 @@ object realTimeTesting {
         .format("console")
         .start()
         .awaitTermination()
+      // convertedPredictions.select(col("predictedLabel"))
+      //   .writeStream
+      //   .outputMode("append")
+      //   .format("console")
+      //   .start()
+      //   .awaitTermination()
     } else {
       convertedPredictions.withColumn("timestamp", current_timestamp())
         .select(outputCols.map(c => col(c)): _*)
@@ -112,6 +119,14 @@ object realTimeTesting {
         .option("checkpointLocation", "/tmp/")
         .start("kdddata")
         .awaitTermination()
+      // convertedPredictions.select(col("predictedLabel"))
+      //   .select(outputCols.map(c => col(c)): _*)
+      //   .writeStream
+      //   .outputMode("append")
+      //   .format("org.elasticsearch.spark.sql")
+      //   .option("checkpointLocation", "/tmp/")
+      //   .start("kdddata1")
+      //   .awaitTermination()
     }
 
   }
