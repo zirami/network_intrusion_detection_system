@@ -107,6 +107,8 @@ services:
      - ES_HEAP_SIZE=1g
    logging:
      driver: none
+   volumes:
+     - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   #============================================================================
   kibana:
    image: kibana:7.12.0

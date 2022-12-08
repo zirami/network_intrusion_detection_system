@@ -81,27 +81,27 @@ object utility {
   def categorizeKdd2Labels(label: Column): Column =
     regexp_replace(col("label"), "^(?!normal).*$", "attack")
 
-  val categorizeKdd5Labels = udf((label:String) => {
-    if (dosType(label))
-      "dos"
-    else if (probeType(label))
-      "probe"
-    else if (u2rType(label))
-      "u2r"
-    else if (r2lType(label))
-      "r2l"
-    else
-      "normal"
-  })
+  // val categorizeKdd5Labels = udf((label:String) => {
+  //   if (dosType(label))
+  //     "dos"
+  //   else if (probeType(label))
+  //     "probe"
+  //   else if (u2rType(label))
+  //     "u2r"
+  //   else if (r2lType(label))
+  //     "r2l"
+  //   else
+  //     "normal"
+  // })
 
-  val categorizeKdd3Labels = udf((label:String) => {
-    if (dosType(label))
-      "dos"
-    else if (probeType(label)) //(probeType(label) || u2rType(label) || r2lType(label))
-      "probe"
-    else
-      "normal"
-  })
+  // val categorizeKdd3Labels = udf((label:String) => {
+  //   if (dosType(label))
+  //     "dos"
+  //   else if (probeType(label)) //(probeType(label) || u2rType(label) || r2lType(label))
+  //     "probe"
+  //   else
+  //     "normal"
+  // })
 
   val asDense = udf((v: SparseVector) => v.toDense)
 
