@@ -42,7 +42,7 @@ server.host: "0.0.0.0"
 # The URLs of the Elasticsearch instances to use for all your queries.
 elasticsearch.hosts: ["http://elasticsearch:9200"]
 xpack.encryptedSavedObjects.encryptionKey: "49191095-d069-47fd-8c1d-00ee4686dcd0"
-xpack.security.encryptionKey: "49191095-d069-47fd-8c1d-00ee4686"
+# xpack.security.encryptionKey: "49191095-d069-47fd-8c1d-00ee4686"
 # If your Elasticsearch is protected with basic authentication, these settings provide
 # the username and password that the Kibana server uses to perform maintenance on the Kibana
 # index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
