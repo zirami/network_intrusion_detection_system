@@ -94,7 +94,6 @@ object realTimeTesting {
       .setLabels(indexer.labelsArray(3))
     val convertedPredictions = labelConverter.transform(predictions)
 
-
     //them timestamp va output
     println("Now Streaming ...")
     if (es_host == "console"){
@@ -104,12 +103,6 @@ object realTimeTesting {
         .format("console")
         .start()
         .awaitTermination()
-      // convertedPredictions.select(col("predictedLabel"))
-      //   .writeStream
-      //   .outputMode("append")
-      //   .format("console")
-      //   .start()
-      //   .awaitTermination()
     } else {
       convertedPredictions.withColumn("timestamp", current_timestamp())
         .select(outputCols.map(c => col(c)): _*)
@@ -119,14 +112,6 @@ object realTimeTesting {
         .option("checkpointLocation", "/tmp/")
         .start("kdddata")
         .awaitTermination()
-      // convertedPredictions.select(col("predictedLabel"))
-      //   .select(outputCols.map(c => col(c)): _*)
-      //   .writeStream
-      //   .outputMode("append")
-      //   .format("org.elasticsearch.spark.sql")
-      //   .option("checkpointLocation", "/tmp/")
-      //   .start("kdddata1")
-      //   .awaitTermination()
     }
 
   }
