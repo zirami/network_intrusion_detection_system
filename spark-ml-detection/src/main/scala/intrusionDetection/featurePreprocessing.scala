@@ -55,34 +55,34 @@ object featurePreprocessing {
     pipelineModel
   }
 
-  def applyChiSqSelection1(df: DataFrame): ChiSqSelectorModel = {
+  // def applyChiSqSelection1(df: DataFrame): ChiSqSelectorModel = {
 
-    val chiSqTest = ChiSquareTest.test(df, "featuresForSelection", "label_Indexed").head
-    val pValues = chiSqTest.getAs[DenseVector](0)
+  //   val chiSqTest = ChiSquareTest.test(df, "featuresForSelection", "label_Indexed").head
+  //   val pValues = chiSqTest.getAs[DenseVector](0)
 
-    //Chúng ta bắt đầu với pValue thấp nhất làm ngưỡng và tăng nó cho đến khi ta nhận được ít nhất một nửa số tính năng
-    var pValueThreshold = pValues.values.min
-    val half_of_Total_Features = (pValues.size * 0.5).toInt
+  //   //Chúng ta bắt đầu với pValue thấp nhất làm ngưỡng và tăng nó cho đến khi ta nhận được ít nhất một nửa số tính năng
+  //   var pValueThreshold = pValues.values.min
+  //   val half_of_Total_Features = (pValues.size * 0.5).toInt
 
-    //Chọn ít nhất một nửa tổng số tính năng để giảm thiểu việc loại bỏ các tính năng quan trọng có thể có
-    while (pValues.values.count(_ <= pValueThreshold) < half_of_Total_Features) {
-      pValueThreshold += 0.001
-    }
+  //   //Chọn ít nhất một nửa tổng số tính năng để giảm thiểu việc loại bỏ các tính năng quan trọng có thể có
+  //   while (pValues.values.count(_ <= pValueThreshold) < half_of_Total_Features) {
+  //     pValueThreshold += 0.001
+  //   }
 
-    val selector = new ChiSqSelector()
-      .setSelectorType("fpr")
-      .setFpr(pValueThreshold + 0.000001) //Thêm một số nhỏ để bao gồm threshold trong các giá trị đã chọn
-      .setFeaturesCol("featuresForSelection")
-      .setLabelCol("label_Indexed")
-      .setOutputCol("selectedFeatures")
+  //   val selector = new ChiSqSelector()
+  //     .setSelectorType("fpr")
+  //     .setFpr(pValueThreshold + 0.000001) //Thêm một số nhỏ để bao gồm threshold trong các giá trị đã chọn
+  //     .setFeaturesCol("featuresForSelection")
+  //     .setLabelCol("label_Indexed")
+  //     .setOutputCol("selectedFeatures")
 
-    val chiSqModel = selector.fit(df)
-    val importantFeatures = chiSqModel.selectedFeatures
-    println(s"Selected ${importantFeatures.size} out of ${pValues.size} total features which are: \n " +
-      s"${importantFeatures.mkString("(", ", ", ")")}")
+  //   val chiSqModel = selector.fit(df)
+  //   val importantFeatures = chiSqModel.selectedFeatures
+  //   println(s"Selected ${importantFeatures.size} out of ${pValues.size} total features which are: \n " +
+  //     s"${importantFeatures.mkString("(", ", ", ")")}")
 
-    chiSqModel
-  }
+  //   chiSqModel
+  // }
 
   def applyChiSqSelection2(df: DataFrame, numFeatures: Int): VectorSlicer  = {
 
